@@ -8,6 +8,17 @@ const Button = ({handleClick, text}) => (
     </button>
 )
 
+const StatisticLine = ({text, value}) => {
+  if (text === 'positive') {
+    return (
+      <p>{text} {value} %</p>
+    )
+  }
+  return (
+  <p>{text} {value}</p>
+  )
+}
+
 const Statistics = (props) => {
   if (props.totalValue === 0) {
     return (
@@ -16,11 +27,12 @@ const Statistics = (props) => {
   }
   return (
     <>
-      <p>{props.goodText}{props.goodValue}</p>
-      <p>{props.neutralText}{props.neutralValue}</p>
-      <p>{props.badText}{props.badValue}</p>
-      <p>{props.averageText}{(props.totalValue / 3)}</p>
-      <p>{props.positiveText}{(props.goodValue / props.totalValue) * 100} %</p>
+      <StatisticLine text={'good'} value={props.goodValue} />
+      <StatisticLine text={'neutral'} value={props.neutralValue} />
+      <StatisticLine text={'bad'} value={props.badValue} />
+      <StatisticLine text={'all'} value={props.totalValue} />
+      <StatisticLine text={'average'} value={(props.totalValue / 3)} />
+      <StatisticLine text={'positive'} value={(props.goodValue / props.totalValue) * 100} />
     </>
   )
 }
@@ -32,8 +44,8 @@ const App = () => {
 
   const total = (good + neutral + bad)
 
-  const title1 = "give feedback"
-  const title2 = "statistics"
+  const title1 = 'give feedback'
+  const title2 = 'statistics'
 
   const handleGoodClicks = () => {
     setGood(good + 1)
@@ -50,15 +62,11 @@ const App = () => {
   return (
     <div>
       <Header title={title1} /> 
-
-      <Button handleClick={handleGoodClicks} text={"good"} />
-      <Button handleClick={handleNeutralClicks} text={"neutral"} />
-      <Button handleClick={handleBadClicks} text={"bad"} />
-
+      <Button handleClick={handleGoodClicks} text={'good'} />
+      <Button handleClick={handleNeutralClicks} text={'neutral'} />
+      <Button handleClick={handleBadClicks} text={'bad'} />
       <Header title={title2} />
-
-      <Statistics goodText={'good '} goodValue={good} neutralText={'neutral '} neutralValue={neutral} 
-      badText={'bad '} badValue={bad} totalValue={total} averageText={'average '} positiveText={'positive '} />
+      <Statistics goodValue={good} neutralValue={neutral} badValue={bad} totalValue={total} />
     </div>
   )
 }
