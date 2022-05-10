@@ -10,12 +10,6 @@ const Button = ({handleClick, text}) => (
 
 const Votes = props => <p>{props.text}{props.value}</p>
 
-const Percentages = props => <p>{props.text}{props.value} %</p>
-
-const Statistics = (props) => {
-  
-}
-
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
@@ -52,9 +46,6 @@ const App = () => {
       <Votes text={"good "} value={good} />
       <Votes text={"neutral "} value={neutral} />
       <Votes text={"bad "} value={bad} />
-
-      <Votes text={"average "} value={total / 3} />
-      <Percentages text={"positive "} value={(good / total) * 100} />
 
     </div>
   )
