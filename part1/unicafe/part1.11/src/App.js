@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Header = props => <header><h1>{props.title}</h1></header>
+const Header = props => <h1>{props.title}</h1>
 
 const Button = ({handleClick, text}) => (
     <button onClick={handleClick}>
@@ -11,11 +11,11 @@ const Button = ({handleClick, text}) => (
 const StatisticLine = ({text, value}) => {
   if (text === 'positive') {
     return (
-      <p>{text} {value} %</p>
+        <tr><td>{text} {value} %</td></tr>
     )
   }
   return (
-  <p>{text} {value}</p>
+    <tr><td>{text} {value}</td></tr>
   )
 }
 
@@ -27,12 +27,16 @@ const Statistics = (props) => {
   }
   return (
     <>
-      <StatisticLine text={'good'} value={props.goodValue} />
-      <StatisticLine text={'neutral'} value={props.neutralValue} />
-      <StatisticLine text={'bad'} value={props.badValue} />
-      <StatisticLine text={'all'} value={props.totalValue} />
-      <StatisticLine text={'average'} value={(props.totalValue / 3)} />
-      <StatisticLine text={'positive'} value={(props.goodValue / props.totalValue) * 100} />
+      <table>
+        <tbody>
+            <StatisticLine text={'good'} value={props.goodValue} />
+            <StatisticLine text={'neutral'} value={props.neutralValue} />
+            <StatisticLine text={'bad'} value={props.badValue} />
+            <StatisticLine text={'all'} value={props.totalValue} />
+            <StatisticLine text={'average'} value={(props.totalValue / 3).toFixed(1)} />
+            <StatisticLine text={'positive'} value={((props.goodValue / props.totalValue) * 100).toFixed(1)} />
+        </tbody>
+      </table>
     </>
   )
 }
